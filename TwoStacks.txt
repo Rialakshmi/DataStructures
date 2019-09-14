@@ -1,0 +1,77 @@
+public TwoStacks {
+int size;
+int sizeFirstStack;
+int sizeSecondStack;
+int index;
+int[] array;
+
+public TwoStacks(int size) {
+array=new int[size];
+this.size=size;sizeFirstStack=0;sizeSecondStack=0;index=0;
+}
+
+public void push(int element,String flag) {
+if(!(flag.equals("first") || flag.equals("second")) {
+throw new Exception("You didnt specify either first or second Array");
+}
+if(flag.equals("first") && index<(size-sizeSecondStack)) {
+array[index] = element;
+index ++; sizeFirstStack ++;
+} else {
+throw new Exception("Stack Overflow First Array");
+}
+
+if(flag.equals("second") && index<(size-sizeFirstStack)) {
+array[index] = element;
+index ++; sizeSecondStack ++;
+} else {
+throw new Exception("Stack Overflow Second Array");
+}
+
+}
+
+public int pop(String flag) {
+if(!(flag.equals("first") || flag.equals("second")) {
+throw new Exception("You didnt specify either first or second Array");
+}
+if(flag.equals("first") && sizeFirstStack > 0) {
+index = index -1;
+sizeFirstStack = sizeFirstStack -1;
+return array[index+1];
+} else {
+throw new Exception("Stack Underflow First Array");
+}
+
+if(flag.equals("second") && sizeSecondStack > 0) {
+index = index -1;
+sizeSecondStack = sizeSecondStack -1;
+return array[index+1];
+} else {
+throw new Exception("Stack Underflow Second Array");
+}
+}
+
+public static void main(String args[]) {
+TwoStacks twoStacks=new TwoStacks(10);
+push(10,"first");
+push(9,"first");
+push(8,"first");
+push(7,"first");
+push(6,"first");
+push(5,"second");
+push(4,"second");
+push(3,"second");
+push(2,"second");
+push(1,"second");
+System.out.println(pop("first"));
+System.out.println(pop("first"));
+System.out.println(pop("first"));
+System.out.println(pop("first"));
+System.out.println(pop("first"));
+System.out.println(pop("second"));
+System.out.println(pop("second"));
+System.out.println(pop("second"));
+System.out.println(pop("second"));
+System.out.println(pop("second"));
+}
+}
